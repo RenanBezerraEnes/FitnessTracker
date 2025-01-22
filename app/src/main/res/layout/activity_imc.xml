@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--    //If I add layout_Gravity the scroll breaks if the text is too big-->
+    <!--    //If I remove it it doesnt break.-->
+    <LinearLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:context=".ImcActivity">
+
+
+        <TextView
+            style="@style/TextViewForm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/imc_desc" />
+
+        <EditText
+            android:hint="@string/weight"
+            android:id="@+id/edit_imc_weight"
+            style="@style/EditTextForm"
+             />
+
+        <EditText
+            android:hint="@string/height"
+            android:id="@+id/edit_imc_height"
+            style="@style/EditTextForm"
+            />
+
+        <Button
+            android:id="@+id/btn_imc_send"
+            android:text="@string/calc"
+            style="@style/ButtonForm"
+            />
+    </LinearLayout>
+</ScrollView>

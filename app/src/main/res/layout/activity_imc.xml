@@ -24,14 +24,14 @@
             android:text="@string/imc_desc" />
 
         <EditText
-            android:hint="@string/weight"
             android:id="@+id/edit_imc_weight"
+            android:hint="@string/weight"
             style="@style/EditTextForm"
              />
 
         <EditText
-            android:hint="@string/height"
             android:id="@+id/edit_imc_height"
+            android:hint="@string/height"
             style="@style/EditTextForm"
             />
 

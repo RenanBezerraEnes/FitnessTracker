@@ -4,19 +4,15 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.appcompat.view.menu.MenuView.ItemView
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class MainActivity : AppCompatActivity(), OnItemClickListener {
+class MainActivity : AppCompatActivity() {
     private lateinit var rvMain: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,25 +37,24 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
             )
         )
 
+        val adapter = MainAdapter(mainItems) { id ->
+            when (id) {
+                1 -> {
+                    val intent = Intent(this@MainActivity, ImcActivity::class.java)
+                    startActivity(intent)
+                }
+            }
 
-        val adapter = MainAdapter(mainItems, this)
+        }
         rvMain = findViewById(R.id.rv_main)
         rvMain.adapter = adapter
         rvMain.layoutManager = GridLayoutManager(this, 2)
     }
 
-    override fun onClick(id: Int) {
-        when(id) {
-            1 -> {
-                val intent = Intent(this, ImcActivity::class.java)
-                startActivity(intent)
-            }
-        }
-    }
 
     private inner class MainAdapter(
         private val mainItems: List<MainItem>,
-        private val onItemClickListener: OnItemClickListener
+        private val onItemClickListener: (Int) -> Unit
     ) : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
 
         // 1 - specific layout of cel(item of the list)
@@ -91,7 +86,7 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
                 container.setBackgroundColor(item.color)
 
                 container.setOnClickListener {
-                    onItemClickListener.onClick(item.id)
+                    onItemClickListener.invoke(item.id)
                 }
             }
         }

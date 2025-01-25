@@ -44,8 +44,8 @@ class MainActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
             }
-
         }
+        
         rvMain = findViewById(R.id.rv_main)
         rvMain.adapter = adapter
         rvMain.layoutManager = GridLayoutManager(this, 2)

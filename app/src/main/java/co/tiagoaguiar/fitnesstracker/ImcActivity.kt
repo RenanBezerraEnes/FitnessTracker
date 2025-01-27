@@ -44,7 +44,7 @@ class ImcActivity : AppCompatActivity() {
 
             val imcResponseId = imcResponse(result)
 
-            val dialog = AlertDialog.Builder(this)
+            AlertDialog.Builder(this)
                 .setTitle(getString(R.string.imc_response, result))
                 .setMessage(imcResponseId)
                 .setPositiveButton(
@@ -56,7 +56,13 @@ class ImcActivity : AppCompatActivity() {
                     Thread {
                         val app = (application as App)
                         val dao = app.db.calcDao()
-                        dao.insert(Calc(type = "imc", res = result))
+
+                        val updateId = intent.extras?.getInt("updateId")
+                        if (updateId != null) {
+                            dao.update(Calc(id = updateId, type = "imc", res = result))
+                        } else {
+                            dao.insert(Calc(type = "imc", res = result))
+                        }
 
                         runOnUiThread {
                             openListActivity()
